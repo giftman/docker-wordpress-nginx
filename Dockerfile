@@ -56,8 +56,10 @@ RUN chmod 755 /start.sh
 # private expose
 EXPOSE 3306
 EXPOSE 80
+EXPOSE 443
 
 # volume for mysql database and wordpress install
 VOLUME ["/var/lib/mysql", "/usr/share/nginx/www"]
+VOLUME ["/data/nginx", "/etc/nginx/sites-available/default"]
 
 CMD ["/bin/bash", "/start.sh"]
