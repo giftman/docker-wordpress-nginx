@@ -35,6 +35,8 @@ RUN find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;
 
 # nginx site conf
 ADD ./nginx-site.conf /etc/nginx/sites-available/default
+ADD ./1_babytoygarden.com_bundle.crt /etc/nginx/1_babytoygarden.com_bundle.crt
+ADD ./2_babytoygarden.com.key /etc/nginx/2_babytoygarden.com.key
 
 # Supervisor Config
 RUN /usr/bin/easy_install supervisor
@@ -60,6 +62,5 @@ EXPOSE 443
 
 # volume for mysql database and wordpress install
 VOLUME ["/var/lib/mysql", "/usr/share/nginx/www"]
-VOLUME ["/data/nginx", "/etc/nginx/sites-available/default"]
 
 CMD ["/bin/bash", "/start.sh"]
