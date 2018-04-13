@@ -6,21 +6,30 @@ NB: A big thanks to [jbfink](https://github.com/jbfink/docker-wordpress) who did
 
 You can check out his [Apache version here](https://github.com/jbfink/docker-wordpress).
 
+thanks eugeneware~
+
+This version add https support.
+
 ## Installation
-
-The easiest way to get this docker image installed is to pull the latest version
-from the Docker registry:
-
-```bash
-$ docker pull eugeneware/docker-wordpress-nginx
-```
 
 If you'd like to build the image yourself then:
 
 ```bash
-$ git clone https://github.com/eugeneware/docker-wordpress-nginx.git
+$ git clone https://github.com/giftman/docker-wordpress-nginx.git
 $ cd docker-wordpress-nginx
-$ sudo docker build -t="eugeneware/docker-wordpress-nginx" .
+
+//这里把证书复制到要目录下  更改网站域名和对应的证书名
+
+//nginx-site.conf
+//server_name www.babytoygarden.com;
+//ssl_certificate 1_babytoygarden.com_bundle.crt;
+//ssl_certificate_key 2_babytoygarden.com.key;
+
+//Dockerfile
+//ADD ./1_babytoygarden.com_bundle.crt /etc/nginx/1_babytoygarden.com_bundle.crt
+//ADD ./2_babytoygarden.com.key /etc/nginx/2_babytoygarden.com.key
+
+$ sudo docker build -t="giftman/wordpress" .
 ```
 
 ## Usage
@@ -28,7 +37,13 @@ $ sudo docker build -t="eugeneware/docker-wordpress-nginx" .
 To spawn a new instance of wordpress on port 80.  The -p 80:80 maps the internal docker port 80 to the outside port 80 of the host machine.
 
 ```bash
-$ sudo docker run -p 80:80 --name docker-wordpress-nginx -d eugeneware/docker-wordpress-nginx
+$ sudo docker run -p 80:80 -p 443:443 --name docker-wordpress-nginx -d giftman/wordpress
+```
+
+See If any error:
+
+```
+$ sudo docker logs docker-wordpress-nginx
 ```
 
 Start your newly created docker.
