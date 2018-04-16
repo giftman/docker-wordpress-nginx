@@ -64,4 +64,18 @@ You can the visit the following URL in a browser on your host machine to get sta
 
 ```
 http://127.0.0.1:80
+
+sudo docker ps 
+sudo docker exec -it contain_name /bin/sh
+
+service mysql restart
+
+mysql -uroot -pXXX
+
+删除端口映射规则
+
+a. 获取规则编号  
+    iptables -t nat -nL --line-number
+b. 根据编号删除规则  
+    iptables -t nat -D DOCKER $num
 ```
